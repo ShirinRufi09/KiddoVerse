@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coloring Pages with Download Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: bisque;
+        }
+
+        header {
+            background-color: brown;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        #worksheets {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .worksheet {
+            margin: 20px 0;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .worksheet h2 {
+            color: #3a3a3a;
+        }
+
+        .worksheet-image {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: brown;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Coloring Pages for Kids</h1>
+    </header>
+    
+    <section id="worksheets">
+        <div class="worksheet" id="coloring-page-1">
+            <h2>Coloring Page 1</h2>
+            <img src="https://www.justcolor.net/kids/wp-content/uploads/sites/12/nggallery/unicorns/coloring-pages-for-children-unicorns-77923.jpg" alt="Coloring Page 1" class="worksheet-image">
+            <button class="download-btn" data-image="coloring-page-1.png" data-title="Coloring Page 1">Download Coloring Page 1</button>
+        </div>
+
+        <div class="worksheet" id="coloring-page-2">
+            <h2>Coloring Page 2</h2>
+            <img src="http://clipartmag.com/images/9-11-coloring-pages-28.gif" alt="Coloring Page 2" class="worksheet-image">
+            <button class="download-btn" data-image="coloring-page-2.png" data-title="Coloring Page 2">Download Coloring Page 2</button>
+        </div>
+
+        <div class="worksheet" id="coloring-page-3">
+            <h2>Coloring Page 3</h2>
+            <img src="https://i.pinimg.com/originals/86/31/7a/86317af912357bf9d333dca2d2b057b2.png" alt="Coloring Page 3" class="worksheet-image">
+            <button class="download-btn" data-image="coloring-page-3.png" data-title="Coloring Page 3">Download Coloring Page 3</button>
+        </div>
+
+        <div class="worksheet" id="coloring-page-3">
+            <h2>Coloring Page 3</h2>
+            <img src="https://static.vecteezy.com/system/resources/previews/013/801/625/original/love-birds-isolated-coloring-page-for-kids-free-vector.jpg" alt="Coloring Page 3" class="worksheet-image">
+            <button class="download-btn" data-image="coloring-page-3.png" data-title="Coloring Page 4">Download Coloring Page 3</button>
+        </div>
+
+        <div class="worksheet" id="coloring-page-3">
+            <h2>Coloring Page 3</h2>
+            <img src="https://www.justcolor.net/kids/wp-content/uploads/sites/12/nggallery/turtles/coloring-pages-for-children-turtles-81844.jpg" alt="Coloring Page 3" class="worksheet-image">
+            <button class="download-btn" data-image="coloring-page-3.png" data-title="Coloring Page 5">Download Coloring Page 3</button>
+        </div>
+
+        <div class="worksheet" id="coloring-page-3">
+            <h2>Coloring Page 3</h2>
+            <img src="https://printcolorcraft.com/wp-content/uploads/2015/08/Bigfoot-Monster-Truck-Coloring-Pages.gif" alt="Coloring Page 3" class="worksheet-image">
+            <button class="download-btn" data-image="coloring-page-3.png" data-title="Coloring Page 6">Download Coloring Page 3</button>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.querySelectorAll(".download-btn").forEach(button => {
+            button.addEventListener("click", function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const image = this.getAttribute("data-image");
+                const title = this.getAttribute("data-title");
+
+                // Add the image to the PDF
+                doc.text(title, 10, 10);
+                doc.addImage(image, 'PNG', 10, 20, 180, 180);
+
+                // Save the PDF
+                doc.save(title + ".pdf");
+            });
+        });
+    </script>
+</body>
+</html>

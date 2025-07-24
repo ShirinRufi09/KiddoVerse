@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url("https://marketplace.canva.com/EAE98IQlC5E/1/0/1600w/canva-purple-simple-gaming-background-futuristic-game-zone-desktop-wallpaper-iC5A8PGB4t0.jpg"); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: blue;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .board {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Add transparency to the board */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            font-size: 36px;
+            text-align: center;
+            line-height: 100px;
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #2196f3;
+            color: rosybrown;
+            border: none;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <div class="board">
+        <div class="row">
+            <button class="cell" onclick="makeMove(0, 0)"></button>
+            <button class="cell" onclick="makeMove(0, 1)"></button>
+            <button class="cell" onclick="makeMove(0, 2)"></button>
+        </div>
+        <div class="row">
+            <button class="cell" onclick="makeMove(1, 0)"></button>
+            <button class="cell" onclick="makeMove(1, 1)"></button>
+            <button class="cell" onclick="makeMove(1, 2)"></button>
+        </div>
+        <div class="row">
+            <button class="cell" onclick="makeMove(2, 0)"></button>
+            <button class="cell" onclick="makeMove(2, 1)"></button>
+            <button class="cell" onclick="makeMove(2, 2)"></button>
+        </div>
+    </div>
+    <div id="message"></div>
+    <button onclick="resetGame()">Reset Game</button>
+
+    <script>
+        let currentPlayer = 'X'; // Player is X
+        let computerPlayer = 'O'; // Computer is O
+        let gameBoard = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ];
+
+        function makeMove(row, col) {
+            if (gameBoard[row][col] === '' && currentPlayer === 'X') {
+                gameBoard[row][col] = currentPlayer;
+                document.querySelectorAll('.row')[row].children[col].textContent = currentPlayer;
+
+                if (checkWin(currentPlayer)) {
+                    document.getElementById('message').textContent = `You win! 🎉`;
+                    disableBoard();
+                } else if (isBoardFull()) {
+                    document.getElementById('message').textContent = "It's a draw! 🤔";
+                } else {
+                    currentPlayer = 'O';
+                    computerMove();
+                }
+            }
+        }
+
+        function computerMove() {
+            setTimeout(() => {
+                const emptyCells = [];
+                for (let i = 0; i < 3; i++) {
+                    for (let j = 0; j < 3; j++) {
+                        if (gameBoard[i][j] === '') {
+                            emptyCells.push({ row: i, col: j });
+                        }
+                    }
+                }
+                const randomMove = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                gameBoard[randomMove.row][randomMove.col] = computerPlayer;
+                document.querySelectorAll('.row')[randomMove.row].children[randomMove.col].textContent = computerPlayer;
+
+                if (checkWin(computerPlayer)) {
+                    document.getElementById('message').textContent = `Computer wins! 🤖`;
+                    disableBoard();
+                } else if (isBoardFull()) {
+                    document.getElementById('message').textContent = "It's a draw! 🤔";
+                } else {
+                    currentPlayer = 'X';
+                }
+            }, 500); // Adding a delay to make the computer's move more natural
+        }
+
+        function checkWin(player) {
+            // Check rows, columns, and diagonals for a win
+            for (let i = 0; i < 3; i++) {
+                if (gameBoard[i][0] === player && gameBoard[i][1] === player && gameBoard[i][2] === player) {
+                    return true;
+                }
+                if (gameBoard[0][i] === player && gameBoard[1][i] === player && gameBoard[2][i] === player) {
+                    return true;
+                }
+            }
+
+            if (gameBoard[0][0] === player && gameBoard[1][1] === player && gameBoard[2][2] === player) {
+                return true;
+            }
+
+            if (gameBoard[0][2] === player && gameBoard[1][1] === player && gameBoard[2][0] === player) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function isBoardFull() {
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (gameBoard[i][j] === '') {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function disableBoard() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                cell.disabled = true;
+            });
+        }
+
+        function resetGame() {
+            gameBoard = [
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', '']
+            ];
+            currentPlayer = 'X';
+            document.getElementById('message').textContent = '';
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

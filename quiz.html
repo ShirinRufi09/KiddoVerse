@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Quiz - Earn Coins! 🏆</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            transition: background 0.5s ease-in-out;
+        }
+        .quiz-container {
+            width: 350px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 5px solid #ffcc00;
+            color: black;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff4081;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background-color: #e91e63;
+        }
+        .score {
+            font-size: 20px;
+            margin-top: 15px;
+            color: #ff4081;
+        }
+        .coin-box {
+            font-size: 22px;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content button {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .modal-content button:hover {
+            background-color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎉 Welcome to the Fun Quiz! 🎈</h1>
+    <div class="quiz-container">
+        <h2>Answer & Collect Coins! 🏆</h2>
+        <div id="quiz">
+            <p class="question" id="question">Loading question...</p>
+            <div class="options" id="options"></div>
+        </div>
+        <p class="score">Your Coins: <span class="coin-box" id="coins">0</span> 🪙</p>
+    </div>
+
+    <!-- Modal for Feedback -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p id="modal-feedback"></p>
+            <p id="modal-score"></p>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "What is the color of the sky? 🌈", options: ["Blue", "Green", "Red", "Yellow"], answer: "Blue" },
+            { question: "How many legs does a cat have? 🐱", options: ["Two", "Four", "Six", "Eight"], answer: "Four" },
+            { question: "Which fruit is yellow and monkeys love? 🍌", options: ["Apple", "Banana", "Grapes", "Strawberry"], answer: "Banana" },
+            { question: "What comes after number 3? 🔢", options: ["1", "2", "4", "5"], answer: "4" },
+            { question: "What sound does a cow make? 🐮", options: ["Moo", "Baa", "Meow", "Quack"], answer: "Moo" },
+            { question: "Which shape has 4 equal sides? 🔷", options: ["Triangle", "Square", "Circle", "Rectangle"], answer: "Square" },
+            { question: "What is the opposite of 'Hot'? 🔥", options: ["Cold", "Warm", "Soft", "Hard"], answer: "Cold" },
+            { question: "Which animal is known as 'King of the Jungle'? 🦁", options: ["Tiger", "Elephant", "Lion", "Giraffe"], answer: "Lion" },
+            { question: "How many fingers do humans have? 🖐", options: ["8", "10", "12", "5"], answer: "10" },
+            { question: "What color is a strawberry? 🍓", options: ["Blue", "Red", "Purple", "Green"], answer: "Red" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let coins = 0;
+
+        // Array of different background colors to choose from
+        const backgroundColors = [
+            "#FFEBEE", "#FFF3E0", "#E8F5E9", "#FFCDD2", "#F3E5F5", "#E1F5FE", "#FFEBEE"
+        ];
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizData.length) {
+                document.getElementById("quiz").innerHTML = `<h3>🎉 Quiz Completed! 🎈</h3>
+                    <p>You collected <span class="coin-box">${coins}</span> coins! 🏆</p>`;
+                return;
+            }
+
+            // Change background color randomly from the predefined colors
+            const randomColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+            document.body.style.backgroundColor = randomColor;
+
+            const questionData = quizData[currentQuestionIndex];
+            document.getElementById("question").innerText = questionData.question;
+            
+            let optionsHtml = "";
+            questionData.options.forEach(option => {
+                optionsHtml += `<button onclick="checkAnswer('${option}')">${option}</button>`;
+            });
+
+            document.getElementById("options").innerHTML = optionsHtml;
+        }
+
+        function checkAnswer(selected) {
+            const correctAnswer = quizData[currentQuestionIndex].answer;
+            const feedbackElement = document.getElementById("modal-feedback");
+            const scoreElement = document.getElementById("modal-score");
+
+            // Check if the selected answer is correct or wrong
+            if (selected === correctAnswer) {
+                coins += 10; // Earn 10 coins for a correct answer
+                feedbackElement.innerText = "🎉 Correct! You earned 10 coins! 🏆";
+            } else {
+                feedbackElement.innerText = "❌ Oops! Wrong answer. Try the next one!";
+            }
+
+            scoreElement.innerText = `Total Coins: ${coins} 🪙`;
+            document.getElementById("coins").innerText = coins;
+
+            // Show modal with feedback
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            document.getElementById("myModal").style.display = "none";  // Close the modal
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>

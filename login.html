@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url("http://cdn.wallpapersafari.com/20/61/vdaG72.jpg") no-repeat center center/cover; 
+            /* Add a fun background image */
+            color: #fff;
+        }
+        .login-container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 5px solid #ff4081; /* Frame Design */
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #e91e63;
+        }
+        .about-container {
+            width: 320px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 10px;
+            border: 5px solid #ff4081; /* Square Frame */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            color: #000;
+        }
+        .about-container h3 {
+            color: #ff4081;
+        }
+        .about-container p {
+            color: #333;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .about-container a {
+            color: #ff4081;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .about-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hey Kiddo! Welcome 🎉</h1>
+    <div class="login-container">
+        <h2>Enter Your Magical World ✨</h2>
+        <input type="text" id="username" placeholder="Your Name, Please! 🌟">
+        <input type="password" id="password" placeholder="Secret Magic Code 🔒✨">
+        <button onclick="checkLogin()">Open the Magic Door 🚪✨</button>        
+    </div>
+
+    <div class="about-container">
+        <h3>🌟 About Us 🌟</h3>
+        <p>We bring fun and learning together for kids! 🌈</p>
+        <p>📧 <strong>Contact:</strong> <a href="mailto:support@kidsworld.com">support@kidsworld.com</a></p>
+        <p>📞 <strong>Call Us:</strong> +91 9876543210</p>
+        <p>💡 <strong>More About Us:</strong> <a href="about.html">Click here!</a></p>
+    </div>
+
+    <script>
+        function checkLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            
+            if (username === "kid" && password === "1234") {
+                alert("Hooray! 🎈 Welcome to the Magical World, " + username + "!");
+                window.location.href = "main.html"; // Redirect to main page
+            } else {
+                alert("Oops! 🚀 Wrong Secret Magic Code. Try again!");
+            }
+        }
+    </script>
+</body>
+</html>

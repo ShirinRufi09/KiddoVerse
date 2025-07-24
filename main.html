@@ -1,0 +1,355 @@
+<!-- Profile Button (Top Right Corner) -->
+<div class="profile-btn" onclick="openProfile()">👤</div>  
+<div class="profile-btn" style="right: 90px;" onclick="openEmail()">✉️</div>
+<div class="profile-btn" style="right: 160px;" onclick="openContact()">📞</div>
+
+<!-- Profile Popup Modal -->
+<div id="profileModal" class="modal">  
+  <h3>Update Profile</h3>  
+  <label>Name:</label>  
+  <input type="text" id="name" placeholder="Enter your name">  
+  <label>Age:</label>  
+  <input type="number" id="age" placeholder="Enter your age">  
+  <label>Gender:</label>  
+  <input type="text" id="gender" placeholder="Enter your gender">  
+  <label>Date of Birth:</label>  
+  <input type="date" id="dob">  
+  <label>Profile Picture:</label>  
+  <input type="file" id="profilePic">  
+  <div class="modal-buttons">  
+    <button class="update-btn" onclick="updateProfile()">Update</button>  
+    <button class="close-btn" onclick="closeProfile()">Close</button>  
+  </div>  
+</div>  
+
+<!-- Email Modal -->
+<div id="emailModal" class="modal">  
+  <h3>Send Us an Email</h3>  
+  <label>Your Email:</label>  
+  <input type="email" id="email" placeholder="your@email.com">  
+  <label>Message:</label>  
+  <input type="text" id="message" placeholder="Your message">  
+  <div class="modal-buttons">  
+    <button class="update-btn" onclick="sendEmail()">Send</button>  
+    <button class="close-btn" onclick="closeEmail()">Close</button>  
+  </div>  
+</div>  
+
+<!-- Contact Modal -->
+<div id="contactModal" class="modal">  
+  <h3>Contact Us</h3>  
+  <p>Phone: +91-9876543210</p>  
+  <p>Support Hours: 10AM - 6PM</p>  
+  <div class="modal-buttons">  
+    <button class="close-btn" onclick="closeContact()">Close</button>  
+  </div>  
+</div>
+
+<style>  
+  .profile-btn {  
+    position: absolute;  
+    top: 20px;  
+    right: 20px;  
+    width: 50px;  
+    height: 50px;  
+    background-color: #ff4081;  
+    color: white;  
+    border-radius: 50%;  
+    display: flex;  
+    align-items: center;  
+    justify-content: center;  
+    font-size: 20px;  
+    cursor: pointer;  
+    transition: background 0.3s ease;  
+  }  
+  .profile-btn:nth-child(2) { right: 90px; }
+  .profile-btn:nth-child(3) { right: 160px; }
+
+  .profile-btn:hover {  
+    background-color: #e91e63;  
+  }  
+
+  .modal {  
+    display: none;  
+    position: fixed;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+    background: white;  
+    color: black;  
+    padding: 20px;  
+    border-radius: 10px;  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  
+    width: 300px;  
+    text-align: left;  
+    z-index: 1001;  
+  }  
+
+  .modal input {  
+    width: 100%;  
+    margin: 5px 0;  
+    padding: 8px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    background: rgba(0, 0, 0, 0.1);  
+  }  
+
+  .modal-buttons {  
+    display: flex;  
+    justify-content: space-between;  
+    margin-top: 15px;  
+  }  
+
+  .modal button {  
+    padding: 8px 12px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+  }  
+
+  .update-btn { background-color: #4CAF50; color: white; }  
+  .close-btn { background-color: #ff4081; color: white; }  
+
+  .modal button:hover {  
+    opacity: 0.8;  
+  }  
+</style>  
+
+<script>  
+  function openProfile() {  
+    document.getElementById("profileModal").style.display = "block";  
+  }  
+  function closeProfile() {  
+    document.getElementById("profileModal").style.display = "none";  
+  }  
+  function updateProfile() {  
+    let name = document.getElementById("name").value;  
+    let age = document.getElementById("age").value;  
+    let gender = document.getElementById("gender").value;  
+    let dob = document.getElementById("dob").value;  
+    alert("Profile Updated!\nName: " + name + "\nAge: " + age + "\nGender: " + gender + "\nDOB: " + dob);  
+    closeProfile();  
+  }  
+
+  function openEmail() {
+    document.getElementById("emailModal").style.display = "block";
+  }
+  function closeEmail() {
+    document.getElementById("emailModal").style.display = "none";
+  }
+  function sendEmail() {
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
+    alert("Email sent!\nFrom: " + email + "\nMessage: " + message);
+    closeEmail();
+  }
+
+  function openContact() {
+    document.getElementById("contactModal").style.display = "block";
+  }
+  function closeContact() {
+    document.getElementById("contactModal").style.display = "none";
+  }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KiddoVerse - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background-color: #e3f2fd;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #1a237e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .quote {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ffeb3b;
+      text-align: center;
+      padding: 20px;
+      background-color: #3949ab;
+      margin: 0;
+    }
+
+    .header-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-icons a, .header-icons span {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hero {
+      background: url('https://cdn.pixabay.com/photo/2017/08/01/08/29/people-2561332_1280.jpg') no-repeat center center/cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.4);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+    font-family: 'Fredoka One', cursive;
+      font-size: 4rem;
+      color: #e74c3c ;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: #e59866 ;
+      margin-top: 5px;
+    }
+
+    .section {
+      background: #bbdefb;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .feature-card img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .feature-card h3 {
+      color: #1a237e;
+      margin-top: 15px;
+    }
+
+    .feature-card p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    .feature-card a {
+      display: inline-block;
+      margin-top: 10px;
+      background: #1a237e;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #1a237e;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="quote"> Fun starts with one click! </div>
+
+  <section class="hero" style="background: url('https://www.freepngimg.com/thumb/grass/71819-picture-frame-illustration-cartoon-child-children.png') no-repeat center center/cover;">
+  <div class="hero-content">
+    <h1>KiddoVerse</h1>
+    <p>Every Day is a New Discovery! </p>
+  </div>
+</section>
+
+
+
+  <section class="section">
+    <div class="features">
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3959/3959376.png" alt="Quiz">
+        <h3>Quiz Zone</h3>
+        <p>Test your brain with fun, age-friendly quizzes!</p>
+        <a href="quiz.html">Start Quiz</a>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1699/1699575.png" alt="Color Game">
+        <h3>Color Game</h3>
+        <p>Color the world! Learn while painting fun scenes.</p>
+        <a href="colourprint.html">Play Now</a>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1686/1686019.png" alt="Block Game">
+        <h3>Block Game</h3>
+        <p>Stack, match, and think smart with colorful blocks!</p>
+        <a href="blockgame.html">Try Blocks</a>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2883/2883849.png" alt="Poems">
+        <h3>Poem Time</h3>
+        <p>Sing, rhyme, and learn with classic poems!</p>
+        <a href="poems.html">Read & Sing</a>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2975/2975286.png" alt="Tic Tac Toe">
+        <h3>Tic Tac Toe</h3>
+        <p>Classic Xs and Os with a colorful twist!</p>
+        <a href="tictoe.html">Play Game</a>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4149/4149651.png" alt="Count Game">
+        <h3>Count Game</h3>
+        <p>Count fun shapes and build number skills fast!</p>
+        <a href="countgame.html">Start Counting</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 KiddoVerse | Designed for Little Learners ❤️
+  </footer>
+</body>
+</html>

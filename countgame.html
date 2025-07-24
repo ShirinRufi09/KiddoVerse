@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counting Fun!</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+
+        h1 {
+            color: #ff6347;
+        }
+
+        .frame {
+            border: 2px solid #ff5722;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #fff3e0;
+            width: 80%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        .input-container {
+            margin-top: 30px;
+        }
+
+        .input-container input {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+        }
+
+        .input-container button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+    <h1>Counting Fun!</h1>
+
+    <!-- Frame 1 (Apple Image) -->
+    <div class="frame">
+        <h2>Question 1: Count the Apples!</h2>
+        <div class="image-container">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.IV1b7TridpXEpXtbBoql7QHaJ4&pid=Api&P=0&h=180" alt="Apples" style="width: 300px;">
+        </div>
+        <div class="input-container">
+            <input type="number" id="userAnswer1" placeholder="Your answer">
+            <button onclick="checkAnswer(1)">Submit</button>
+        </div>
+        <div id="message1"></div>
+    </div>
+
+    <!-- Frame 2 (Balloon Image) -->
+    <div class="frame">
+        <h2>Question 2: Count the Circles!</h2>
+        <div class="image-container">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.XY8VkGVvk51SE6J2gW_NyQHaHa&pid=Api&P=0&h=180" alt="Balloons" style="width: 300px;">
+        </div>
+        <div class="input-container">
+            <input type="number" id="userAnswer2" placeholder="Your answer">
+            <button onclick="checkAnswer(2)">Submit</button>
+        </div>
+        <div id="message2"></div>
+    </div>
+
+    <!-- Frame 3 (Star Image) -->
+    <div class="frame">
+        <h2>Question 3: Count the Balls!</h2>
+        <div class="image-container">
+            <img src="https://tse3.mm.bing.net/th?id=OIP.0bAee92RyzdRkMdAvqNBAwHaEK&pid=Api&P=0&h=180" alt="Stars" style="width: 300px;">
+        </div>
+        <div class="input-container">
+            <input type="number" id="userAnswer3" placeholder="Your answer">
+            <button onclick="checkAnswer(3)">Submit</button>
+        </div>
+        <div id="message3"></div>
+    </div>
+
+    <!-- Frame 4 (Car Image) -->
+    <div class="frame">
+        <h2>Question 4: Count the Stars!</h2>
+        <div class="image-container">
+            <img src="http://clipartmag.com/images/all-star-clipart-12.png" alt="Cars" style="width: 300px;">
+        </div>
+        <div class="input-container">
+            <input type="number" id="userAnswer4" placeholder="Your answer">
+            <button onclick="checkAnswer(4)">Submit</button>
+        </div>
+        <div id="message4"></div>
+    </div>
+
+    <!-- Frame 5 (Tree Image) -->
+    <div class="frame">
+        <h2>Question 5: Count the Candles!</h2>
+        <div class="image-container">
+            <img src="https://thumbs.dreamstime.com/z/candle-cartoon-26738426.jpg" alt="Trees" style="width: 300px;">
+        </div>
+        <div class="input-container">
+            <input type="number" id="userAnswer5" placeholder="Your answer">
+            <button onclick="checkAnswer(5)">Submit</button>
+        </div>
+        <div id="message5"></div>
+    </div>
+
+    <!-- Frame 6 (Flower Image) -->
+    <div class="frame">
+        <h2>Question 6: Count the Flowers!</h2>
+        <div class="image-container">
+            <img src="https://media.baamboozle.com/uploads/images/79832/1597738403_29638" alt="Flowers" style="width: 300px;">
+        </div>
+        <div class="input-container">
+            <input type="number" id="userAnswer6" placeholder="Your answer">
+            <button onclick="checkAnswer(6)">Submit</button>
+        </div>
+        <div id="message6"></div>
+    </div>
+
+    <script>
+        // Correct number for each question
+        const correctAnswers = {
+            1: 6, // Number of apple
+            2: 4, // Number of balloons
+            3: 8, // Number of stars
+            4: 6, // Number of cars
+            5: 10, // Number of trees
+            6: 8  // Number of flowers
+        };
+
+        // Function to check the answer for each question
+        function checkAnswer(questionNumber) {
+            const userAnswer = parseInt(document.getElementById(`userAnswer${questionNumber}`).value);
+            const messageElement = document.getElementById(`message${questionNumber}`);
+            const correctAnswer = correctAnswers[questionNumber];
+
+            if (userAnswer === correctAnswer) {
+                messageElement.textContent = 'Yay! You got it right! 🎉';
+                messageElement.style.color = 'green';
+            } else {
+                messageElement.textContent = 'Oops! Try again! You can do it! 😄';
+                messageElement.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
